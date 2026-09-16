@@ -37,20 +37,23 @@
 
 ```powershell
 # 安装（创建一个“启动”文件夹里的快捷方式，无需管理员）
-D:\Learning\Anaconda3\python.exe app\main.py --install-autostart
+python app\main.py --install-autostart
 
 # 移除
-D:\Learning\Anaconda3\python.exe app\main.py --uninstall-autostart
+python app\main.py --uninstall-autostart
 
 # 查看当前状态（数据文件、今日条目数、自启是否装好）
-D:\Learning\Anaconda3\python.exe app\main.py --status
+python app\main.py --status
 
 # 立刻运行（不等待，用于调试）
-D:\Learning\Anaconda3\python.exe app\main.py
+python app\main.py
 
 # 自检：在临时目录里跑一遍数据层与界面层，不动正式数据
-D:\Learning\Anaconda3\python.exe tools\selftest.py
+python tools\selftest.py
 ```
+
+上面命令里的 `python` 换成你自己解释器的路径即可（不确定就先跑
+`python -c "import sys;print(sys.executable)"` 看一眼）。
 
 也可以直接用 `tools\install_autostart.ps1` 和 `tools\uninstall_autostart.ps1`。
 装好后可以在「任务管理器 → 启动应用」里看到"今日待办"，在那里也能临时禁用。
@@ -91,11 +94,11 @@ logs/app.log                   运行日志（1MB 轮转，保留 5 份，不含
 **想把"一天只问一次"改成每次都问？**
 每次启动都会显示清单；需要重新进入录入模式，删掉当天 JSON 里的 `asked_at` 字段即可。
 
-**重装 Python 或换了 Anaconda 路径后不启动了？**
+**重装 Python 或换了 Python 路径后不启动了？**
 重新跑一次 `--install-autostart`。另外 `app/host/autostart.py` 会自动定位 `pythonw.exe`，
 只要 `python` 在 PATH 里就能装对。
 
-**想让启动更快、彻底摆脱 Anaconda？**
+**想让启动更快、摆脱对 Python 环境的依赖？**
 用 PyInstaller 打包成单个 exe：`pip install pyinstaller` 然后
 `pyinstaller -F -w -n 今日待办 app/main.py`，再把自启动目标指向生成的 exe。
 
