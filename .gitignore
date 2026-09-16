@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+
+# 运行时数据与日志（本机私有，不纳入版本管理）
+data/
+logs/
+
+# 打包产物
+build/
+dist/
+*.spec
+
+# 编辑器
+.vscode/
+.idea/
